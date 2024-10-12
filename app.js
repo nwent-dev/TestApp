@@ -4,7 +4,7 @@ const app = express();
 // Настройка редиректа
 app.get('/', (req, res) => {
     // Условие для редиректа
-    const redirectCondition = true; // Измени это условие в зависимости от логики
+    const redirectCondition = false; // Измени это условие в зависимости от логики
     if (redirectCondition) {
         res.redirect('https://ya.ru'); // Перенаправляем на ya.ru
     } else {
