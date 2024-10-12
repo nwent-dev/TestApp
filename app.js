@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 
 // Указываем папку для статических файлов (например, папка с index.html)
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // Настройка редиректа
 app.get('/', (req, res) => {
