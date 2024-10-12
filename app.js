@@ -8,6 +8,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Настройка редиректа
 app.get('/', (req, res) => {
     // Условие для редиректа
+    console.log('Redirect condition:', redirectCondition); // Логируем значе
     const redirectCondition = true; // Измени это условие в зависимости от логики
     if (redirectCondition) {
         res.redirect('https://ya.ru'); // Перенаправляем на ya.ru
