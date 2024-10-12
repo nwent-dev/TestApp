@@ -1,5 +1,9 @@
 const express = require('express');
+const path = require('path');
 const app = express();
+
+// Указываем папку для статических файлов (например, папка с index.html)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Настройка редиректа
 app.get('/', (req, res) => {
@@ -8,7 +12,7 @@ app.get('/', (req, res) => {
     if (redirectCondition) {
         res.redirect('https://ya.ru'); // Перенаправляем на ya.ru
     } else {
-        res.redirect('index.html'); // Перенаправляем на твой сайт
+        res.redirect('/index.html'); // Перенаправляем на index.html
     }
 });
 
