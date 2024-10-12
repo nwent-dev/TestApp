@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
     if (redirectCondition) {
         res.redirect('https://ya.ru'); // Перенаправляем на ya.ru
     } else {
-        res.redirect('https://твой-домен.com'); // Перенаправляем на твой сайт
+        res.redirect('index.html'); // Перенаправляем на твой сайт
     }
 });
 
