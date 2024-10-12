@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
     // Условие для редиректа
     const redirectCondition = true; // Измени это условие в зависимости от логики
     if (redirectCondition) {
-        res.redirect('https://ya.ru'); // Перенаправляем на ya.ru
+        res.redirect('https://yandex.ru'); // Перенаправляем на ya.ru
     } else {
         res.redirect('https://твой-домен.com'); // Перенаправляем на твой сайт
     }
