@@ -1,14 +1,17 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Настройка редиректа
-app.get('/', (req, res) => {
+app.get('/redirect', (req, res) => {
     // Условие для редиректа
     const redirectCondition = true; // Измени это условие в зависимости от логики
     if (redirectCondition) {
         res.redirect('https://yandex.ru'); // Перенаправляем на ya.ru
     } else {
-        res.redirect('https://твой-домен.com'); // Перенаправляем на твой сайт
+        res.redirect('/index.html'); // Перенаправляем на твой сайт
     }
 });
 
