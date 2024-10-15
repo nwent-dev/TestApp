@@ -7,23 +7,24 @@ canvas.height = window.innerHeight;
 
 // Создаем объект Image для загрузки картинки самолетика
 const planeImage = new Image();
-planeImage.src = 'plane.png';  // Локальный путь к изображению
+planeImage.src = 'plane.png';  // Локальный путь к изображению самолетика
 
 // Создаем объект Image для облаков
 const cloudImage = new Image();
 cloudImage.src = 'cloud.png';  // Локальный путь к изображению облаков
 
-// Параметры самолетика
+// Параметры самолетика (уменьшаем размеры для мобильных устройств)
 const plane = {
-  x: canvas.width / 2 - 100,
-  y: canvas.height / 2 - 100,
-  width: 200,
-  height: 200,
+  x: canvas.width / 2 - 50,
+  y: canvas.height / 2 - 50,
+  width: 100,  // Начальная ширина
+  height: 100, // Начальная высота
   speed: 5,
   dy: 0,
   angle: 0,
   targetAngle: 0,
-  angleSpeed: 0.02
+  angleSpeed: 0.02,
+  aspectRatio: 1  // Пропорции картинки будут установлены после загрузки изображения
 };
 
 // Параметры для облаков (создание эффекта движения)
@@ -156,7 +157,16 @@ function draw() {
     ctx.translate(plane.x + plane.width / 2, plane.y + plane.height / 2);
     ctx.rotate(plane.angle);
     ctx.scale(-1, 1);
-    ctx.drawImage(planeImage, -plane.width / 2, -plane.height / 2, plane.width, plane.height);
+
+    // Уменьшаем самолетик пропорционально его соотношению сторон
+    ctx.drawImage(
+      planeImage, 
+      -plane.width / 2, 
+      -plane.height / 2, 
+      plane.width, 
+      plane.width / plane.aspectRatio
+    );
+
     ctx.restore();
   }
 
@@ -189,7 +199,7 @@ function endGame() {
 // Перезапуск игры
 function resetGame() {
   gameRunning = true;
-  plane.y = canvas.height / 2 - 100;
+  plane.y = canvas.height / 2 - 50;
   obstacles = [];
   canvas.removeEventListener('click', resetGame);
   createObstacle();
@@ -197,8 +207,9 @@ function resetGame() {
 
 // Начало игры после загрузки изображений
 planeImage.onload = function() {
+  plane.aspectRatio = planeImage.width / planeImage.height;  // Устанавливаем пропорции изображения
   createObstacle();
-  setInterval(createObstacle, 5000);  // Увеличен интервал появления препятствий до 5 секунд
+  setInterval(createObstacle, 5000);  // Интервал появления препятствий - 5 секунд
   gameLoop();
 };
 cloudImage.onload = function() {
