@@ -13,12 +13,12 @@ planeImage.src = 'plane.png';  // Локальный путь к изображ�
 const cloudImage = new Image();
 cloudImage.src = 'cloud.png';  // Локальный путь к изображению облаков
 
-// Параметры самолетика (уменьшаем размеры для мобильных устройств)
+// Параметры самолетика
 const plane = {
   x: canvas.width / 2 - 50,
   y: canvas.height / 2 - 50,
-  width: 100,  // Начальная ширина
-  height: 100, // Начальная высота
+  width: 100,
+  height: 100,
   speed: 5,
   dy: 0,
   angle: 0,
@@ -27,7 +27,7 @@ const plane = {
   aspectRatio: 1  // Пропорции картинки будут установлены после загрузки изображения
 };
 
-// Параметры для облаков (создание эффекта движения)
+// Параметры для облаков
 const clouds = [
   { x: 0, y: 100, speed: 1 },
   { x: canvas.width / 2, y: 200, speed: 1.5 },
@@ -37,6 +37,8 @@ const clouds = [
 // Массив для препятствий
 let obstacles = [];
 let gameRunning = true; // Изначально игра идет
+let score = 0; // Счёт игры
+let frameCount = 0; // Счётчик кадров
 
 // Добавляем функцию для создания препятствий
 function createObstacle() {
@@ -115,6 +117,7 @@ function update() {
   });
 
   // Обновляем позицию препятствий
+  // Обновляем позицию препятствий
   obstacles.forEach((obstacle, index) => {
     obstacle.x -= 2;  // Уменьшенная скорость движения преград
 
@@ -124,15 +127,20 @@ function update() {
     }
 
     // Проверка на столкновение с самолетом
-    if (plane.x < obstacle.x + obstacle.width && plane.x + plane.width > obstacle.x) {
-      if (plane.y < obstacle.topHeight || plane.y + plane.height > canvas.height - obstacle.bottomHeight) {
-        endGame();
-      }
+    if (checkCollision(plane, obstacle)) {
+      endGame();
     }
   });
+
+
+  // Увеличиваем счёт каждые 4 кадра
+  frameCount++;
+  if (frameCount % 4 === 0) {
+    score += 1;
+  }
 }
 
-// Отрисовка облаков, самолетика и препятствий
+// Отрисовка облаков, самолетика, препятствий и счёта
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -170,6 +178,11 @@ function draw() {
     ctx.restore();
   }
 
+  // Отрисовка счёта
+  ctx.fillStyle = 'black';
+  ctx.font = '30px Arial';
+  ctx.fillText(`Счёт: ${score}`, canvas.width - 150, 50);
+
   // Если игра завершена, показываем кнопку "Начать заново"
   if (!gameRunning) {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -201,9 +214,37 @@ function resetGame() {
   gameRunning = true;
   plane.y = canvas.height / 2 - 50;
   obstacles = [];
+  score = 0;  // Сбрасываем счёт
+  frameCount = 0;  // Сбрасываем счётчик кадров
   canvas.removeEventListener('click', resetGame);
   createObstacle();
 }
+
+// Проверка на столкновение с самолетом
+function checkCollision(plane, obstacle) {
+  const planeHitbox = {
+    top: plane.y + 10, // Отступ сверху
+    bottom: plane.y + plane.height - 10, // Отступ снизу
+    left: plane.x + 10, // Отступ слева
+    right: plane.x + plane.width - 10 // Отступ справа
+  };
+
+  const obstacleHitbox = {
+    top: obstacle.topHeight,
+    bottom: canvas.height - obstacle.bottomHeight,
+    left: obstacle.x,
+    right: obstacle.x + obstacle.width
+  };
+
+  // Проверка столкновения по хитбоксам
+  if (planeHitbox.right > obstacleHitbox.left &&
+      planeHitbox.left < obstacleHitbox.right &&
+      (planeHitbox.top < obstacleHitbox.top || planeHitbox.bottom > obstacleHitbox.bottom)) {
+    return true; // Столкновение
+  }
+  return false; // Нет столкновения
+}
+
 
 // Начало игры после загрузки изображений
 planeImage.onload = function() {
