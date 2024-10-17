@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Joti+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airplane Game</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: skyblue;
+            position: relative; /* Добавлено для корректного позиционирования абсолютных элементов */
+        }
+        canvas {
+            background: lightblue;
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto; /* Центрируем canvas */
+        }
+        #menu, #gameOverScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url("public/menuBackground.svg");
+            background-size: cover;
+            z-index: 10; /* Отображаем меню поверх canvas */
+        }
+
+        #toggleSoundButton {
+            padding-top: 3%;
+        }
+
+        button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #555;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .control-button {
+            cursor: pointer;
+            user-select: none;
+            flex-basis: 28%; 
+        }
+
+        #menuText {
+            position: fixed;
+            top: 0;
+            margin-top: 10%;
+            padding: 10px;
+            font-family: 'Joti One';
+            font-size: 68px;
+            line-height: 91px;
+            background: linear-gradient(90deg, #1B8EE0 0%, #0D00FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .scoreContainer {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .scoreText {
+            font-family: 'Joti One';
+            font-size: 25px;
+            line-height: 33px;
+            color: #000;
+        }
+
+        #scoreDisplay {
+            font-family: 'Joti One';
+            font-size: 25px;
+            line-height: 33px;
+            color: #000;
+            margin-left: 10px; /* Отступ для числа */
+        }
+
+        /* Стили для toggleSoundGameBtn */
+        #toggleSoundGameBtnWrapper {
+            position: absolute;
+            top: 20px;
+            right: 20px; /* Правый верхний угол */
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <!-- Обертка для текста "score:" и значения -->
+        <div class="scoreContainer">
+            <div class="scoreText">score:</div>
+            <div id="scoreDisplay">0</div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <div id="menu" style="display: none;">
+        <a id="menuText">Fly Machine</a>
+        <img id="startButton" src="public/startButton.svg">
+        <img id="toggleSoundButton" src="public/soundButton.svg">
+    </div>
+
+    <div id="toggleSoundGameBtnWrapper">
+        <img id="toggleSoundGameBtn" src="public/soundOn.svg">
+    </div>
+
+    <div class="controls">
+        <img class="control-button" id="up" src="public/upButton.png">
+        <img class="control-button" id="down" src="public/downButton.png">
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
