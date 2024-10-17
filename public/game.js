@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Адаптивность для мобильных устройств
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    document.addEventListener('selectstart', function(event) {
+        event.preventDefault();
+    });
     
     // Загружаем текстуры
     const airplaneImg = new Image();
