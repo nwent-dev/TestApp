@@ -7,16 +7,16 @@ canvas.height = window.innerHeight;
 
 // Загружаем текстуры
 const airplaneImg = new Image();
-airplaneImg.src = 'public/airplane.png'; // Путь к изображению самолета
+airplaneImg.src = 'airplane.png'; // Путь к изображению самолета
 
 const cloudImg = new Image();
-cloudImg.src = 'public/cloud.svg'; // Путь к изображению облака
+cloudImg.src = 'cloud.svg'; // Путь к изображению облака
 
 const soundOnImg = new Image()
-soundOnImg.src = 'public/soundOn.svg'
+soundOnImg.src = 'soundOn.svg'
 
 const soundOffImg = new Image()
-soundOffImg.src = 'public/soundOff.svg'
+soundOffImg.src = 'soundOff.svg'
 
 const enemyImages = [
     new Image(), // Первое изображение врага
@@ -24,17 +24,17 @@ const enemyImages = [
     new Image()  // Третье изображение врага
 ];
 
-enemyImages[0].src = 'public/enemy1.svg'; // Путь к первому изображению врага
-enemyImages[1].src = 'public/enemy2.svg'; // Путь ко второму изображению врага
-enemyImages[2].src = 'public/enemy3.svg'; // Путь к третьему изображению врага
+enemyImages[0].src = 'enemy1.svg'; // Путь к первому изображению врага
+enemyImages[1].src = 'enemy2.svg'; // Путь ко второму изображению врага
+enemyImages[2].src = 'enemy3.svg'; // Путь к третьему изображению врага
 
 const backgroundImg = new Image();
-backgroundImg.src = 'public/background.svg'; // Путь к изображению фона
+backgroundImg.src = 'background.svg'; // Путь к изображению фона
 
 // Звуки
-const backgroundMusic = new Audio('public/background.mp3'); // Путь к фоновому звуку
-const gameOverSound = new Audio('public/gameover.mp3'); // Путь к звуку окончания игры
-const pointSound = new Audio('public/pointsound.mp3'); // Путь к звуку увеличения очков
+const backgroundMusic = new Audio('background.mp3'); // Путь к фоновому звуку
+const gameOverSound = new Audio('gameover.mp3'); // Путь к звуку окончания игры
+const pointSound = new Audio('pointsound.mp3'); // Путь к звуку увеличения очков
 
 let airplane = {
     x: 50,
@@ -138,18 +138,18 @@ function createEnemy() {
 }
 
 toggleSoundInGameBtn = document.getElementById('toggleSoundGameBtn')
-if (muted === false) toggleSoundInGameBtn.src = 'public/soundOn.svg' 
-if (muted === true) toggleSoundInGameBtn.src = 'public/soundOff.svg' 
+if (muted === false) toggleSoundInGameBtn.src = 'soundOn.svg' 
+if (muted === true) toggleSoundInGameBtn.src = 'soundOff.svg' 
 
 function updateSoundBtn() {
     if (muted === true) {
         backgroundMusic.pause();
         gameOverSound.pause(); 
         pointSound.pause();
-        toggleSoundInGameBtn.src = 'public/soundOff.svg'
+        toggleSoundInGameBtn.src = 'soundOff.svg'
     } else {
         backgroundMusic.play();
-        toggleSoundInGameBtn.src = 'public/soundOn.svg'
+        toggleSoundInGameBtn.src = 'soundOn.svg'
     }
 }
 
