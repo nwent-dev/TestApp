@@ -9,15 +9,15 @@
     <title>Airplane Game</title>
     <style>
         * {
-            user-select: none;
-            webkit-user-select: none;
-            -ms-user-select: none;
+            -webkit-user-select: none;  /* Для WebKit (мобильные браузеры и Safari) */
+            -ms-user-select: none;      /* Для Internet Explorer */
+            user-select: none;          /* Стандартное свойство */
+            -webkit-touch-callout: none;
         }
         body {
             margin: 0;
             background-color: skyblue;
-            position: relative; /* Добавлено для корректного позиционирования абсолютных элементов */
-            -webkit-touch-callout: none;  
+            position: relative; /* Добавлено для корректного позиционирования абсолютных элементов */  
         }
         canvas {
             background: lightblue;
