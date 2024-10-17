@@ -8,13 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airplane Game</title>
     <style>
+        * {
+            user-select: none;
+            webkit-user-select: none;
+            -ms-user-select: none;
+        }
         body {
             margin: 0;
             background-color: skyblue;
             position: relative; /* Добавлено для корректного позиционирования абсолютных элементов */
-            user-select: none;
-            webkit-user-select: none;
-            -ms-user-select: none;
             -webkit-touch-callout: none;  
         }
         canvas {
