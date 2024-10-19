@@ -129,15 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
     downBtn.addEventListener('touchend', () => {
         airplane.speedY = 0; // Останавливаем движение
     });
-    upButton.on('pointerdown', () => {
-      airplaneSpeed += 5;
-      upButton.blur(); // Убираем фокус
-    });
-
-    downButton.on('pointerdown', () => {
-      airplaneSpeed -= 5;
-      downButton.blur(); // Убираем фокус
-    });
     
     // Отключение выделения элементов
     document.addEventListener('selectstart', (e) => {
