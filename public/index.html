@@ -23,6 +23,7 @@
       canvas:focus {
         outline: none; /* Убираем фокус */
       }
+
       * {
         touch-action: manipulation;
         -webkit-user-select: none; /* Для WebKit (мобильные браузеры и Safari) */
@@ -32,17 +33,20 @@
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
       }
+
       body {
         margin: 0;
         background-color: skyblue;
         position: relative; /* Добавлено для корректного позиционирования абсолютных элементов */
       }
+
       canvas {
         background: lightblue;
         border: 1px solid black;
         display: block;
         margin: 0 auto; /* Центрируем canvas */
       }
+
       #menu,
       #gameOverScreen {
         position: absolute;
@@ -64,20 +68,28 @@
       }
 
       button {
-        padding: 15px 30px;
         margin: 10px;
-        font-size: 20px;
-        border: none;
+        border: none; /* Убираем рамку */
         border-radius: 5px;
-        background-color: #555;
-        color: white;
         cursor: pointer;
         user-select: none;
         transition: background-color 0.3s;
+        background: transparent; /* Прозрачный фон кнопки */
+        display: inline-block; /* Кнопка занимает только необходимую ширину */
+        width: 33.33vw; /* Ширина кнопки - 1/3 ширины экрана */
+        aspect-ratio: 1 / 1; /* Соотношение сторон 1:1 для квадратной кнопки */
+        background-size: contain; /* Масштабируем изображение, чтобы оно вписывалось в кнопку */
+        background-repeat: no-repeat; /* Без повторения фона */
+        background-position: center; /* Центрируем фоновое изображение */
       }
 
       button:hover {
-        background-color: #777;
+        opacity: 0.8; /* Эффект наведения на кнопку */
+      }
+
+      /* Убираем эффект прозрачности при нажатии */
+      button:active {
+        opacity: 1; /* Прозрачность при нажатии 1 (не прозрачная) */
       }
 
       .controls {
@@ -86,17 +98,6 @@
         width: 100%;
         display: flex;
         justify-content: space-around;
-      }
-
-      .control-button {
-        cursor: pointer;
-        user-select: none;
-        flex-basis: 28%;
-        width: 60px; /* Ширина кнопки */
-        height: 60px; /* Высота кнопки */
-        background-size: contain; /* Размер фона */
-        background-repeat: no-repeat; /* Без повторения фона */
-        border: none; /* Убрать рамку */
       }
 
       #up {
