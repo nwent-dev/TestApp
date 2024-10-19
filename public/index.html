@@ -10,8 +10,11 @@
     <style>
 
         button, img, canvas {
-          -webkit-tap-highlight-color: transparent; /* Отключить серую рамку на iOS */
-          outline: none; /* Убрать контур */
+            -webkit-tap-highlight-color: transparent; /* Отключить серую рамку на iOS */
+            -webkit-touch-callout: none; /* Отключить контекстное меню при долгом нажатии */
+            user-select: none; /* Отключить выделение текста */
+            outline: none; /* Убрать контур */
+            touch-action: manipulation; /* Отключить встроенную обработку касаний */
         }
         
         button:focus, img:focus, canvas:focus {
