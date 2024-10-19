@@ -8,6 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airplane Game</title>
     <style>
+
+        button, img, canvas {
+          -webkit-tap-highlight-color: transparent; /* Отключить серую рамку на iOS */
+          outline: none; /* Убрать контур */
+        }
+        
+        button:focus, img:focus, canvas:focus {
+          outline: none; /* Убираем фокус */
+        }
         * {
             -webkit-user-select: none;  /* Для WebKit (мобильные браузеры и Safari) */
             -ms-user-select: none;      /* Для Internet Explorer */
