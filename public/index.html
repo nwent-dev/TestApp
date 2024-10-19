@@ -8,23 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Airplane Game</title>
     <style>
-      canvas {
-      outline: none; /* Убирает обводку при фокусе */
-      -webkit-tap-highlight-color: transparent; /* Отключает выделение при долгом нажатии на мобильных устройствах */
-    }
-    
-    button {
-      outline: none; /* Отключает обводку для кнопок */
-      -webkit-user-select: none; /* Отключает выделение контента */
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* Убирает серый фон при нажатии */
-    }
-
       button,
       img,
       canvas {
         -webkit-tap-highlight-color: transparent; /* Отключить серую рамку на iOS */
         -webkit-touch-callout: none; /* Отключить контекстное меню при долгом нажатии */
-        -webkit-touch-callout: none;
         user-select: none; /* Отключить выделение текста */
         outline: none; /* Убрать контур */
         touch-action: manipulation; /* Отключить встроенную обработку касаний */
@@ -104,6 +92,19 @@
         cursor: pointer;
         user-select: none;
         flex-basis: 28%;
+        width: 60px; /* Ширина кнопки */
+        height: 60px; /* Высота кнопки */
+        background-size: contain; /* Размер фона */
+        background-repeat: no-repeat; /* Без повторения фона */
+        border: none; /* Убрать рамку */
+      }
+
+      #up {
+        background-image: url('upButton.png'); /* Устанавливаем изображение фона для кнопки "вверх" */
+      }
+
+      #down {
+        background-image: url('downButton.png'); /* Устанавливаем изображение фона для кнопки "вниз" */
       }
 
       #menuText {
@@ -175,11 +176,10 @@
     </div>
 
     <div class="controls">
-      <img class="control-button" id="up" src="upButton.png" />
-      <img class="control-button" id="down" src="downButton.png" />
+      <button class="control-button" id="up"></button>
+      <button class="control-button" id="down"></button>
+    </div>
 
     <script src="game.js"></script>
   </body>
 </html>
-
-    </div>
