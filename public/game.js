@@ -10,13 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
     });
     
-    document.addEventListener(
-      'contextmenu',
-      function (e) {
-        e.preventDefault(); // Отключаем контекстное меню
-      },
-      false
-    );
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
 
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
