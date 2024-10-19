@@ -17,6 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       false
     );
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        backgroundMusic.pause(); // Остановить музыку, если приложение свернуто
+      } else {
+        backgroundMusic.play(); // Включить музыку снова, когда приложение активно
+      }
+    });
     
     // Загружаем текстуры
     const airplaneImg = new Image();
