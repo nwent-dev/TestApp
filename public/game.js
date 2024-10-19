@@ -10,6 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
     });
     
+    document.addEventListener(
+      'contextmenu',
+      function (e) {
+        e.preventDefault(); // Отключаем контекстное меню
+      },
+      false
+    );
+    
     // Загружаем текстуры
     const airplaneImg = new Image();
     airplaneImg.src = 'airplane.png'; // Путь к изображению самолета
