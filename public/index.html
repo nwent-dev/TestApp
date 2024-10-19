@@ -8,6 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Airplane Game</title>
     <style>
+      canvas {
+      outline: none; /* Убирает обводку при фокусе */
+      -webkit-tap-highlight-color: transparent; /* Отключает выделение при долгом нажатии на мобильных устройствах */
+    }
+    
+    button {
+      outline: none; /* Отключает обводку для кнопок */
+      -webkit-user-select: none; /* Отключает выделение контента */
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* Убирает серый фон при нажатии */
+    }
+
       button,
       img,
       canvas {
