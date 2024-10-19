@@ -1,168 +1,172 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Joti+One&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Joti+One&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Airplane Game</title>
     <style>
+      button,
+      img,
+      canvas {
+        -webkit-tap-highlight-color: transparent; /* Отключить серую рамку на iOS */
+        -webkit-touch-callout: none; /* Отключить контекстное меню при долгом нажатии */
+        user-select: none; /* Отключить выделение текста */
+        outline: none; /* Убрать контур */
+        touch-action: manipulation; /* Отключить встроенную обработку касаний */
+      }
 
-        button, img, canvas {
-            -webkit-tap-highlight-color: transparent; /* Отключить серую рамку на iOS */
-            -webkit-touch-callout: none; /* Отключить контекстное меню при долгом нажатии */
-            user-select: none; /* Отключить выделение текста */
-            outline: none; /* Убрать контур */
-            touch-action: manipulation; /* Отключить встроенную обработку касаний */
-        }
-        
-        button:focus, img:focus, canvas:focus {
-            outline: none; /* Убираем фокус */
-        }
-        * {
-            touch-action: manipulation;
-            -webkit-user-select: none;  /* Для WebKit (мобильные браузеры и Safari) */
-            -ms-user-select: none;      /* Для Internet Explorer */
-            user-select: none;          /* Стандартное свойство */
-            -webkit-touch-callout: none;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-        body {
-            margin: 0;
-            background-color: skyblue;
-            position: relative; /* Добавлено для корректного позиционирования абсолютных элементов */  
-        }
-        canvas {
-            background: lightblue;
-            border: 1px solid black;
-            display: block;
-            margin: 0 auto; /* Центрируем canvas */
-        }
-        #menu, #gameOverScreen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-image: url("menuBackground.svg");
-            background-size: cover;
-            z-index: 10; /* Отображаем меню поверх canvas */
-        }
+      button:focus,
+      img:focus,
+      canvas:focus {
+        outline: none; /* Убираем фокус */
+      }
+      * {
+        touch-action: manipulation;
+        -webkit-user-select: none; /* Для WebKit (мобильные браузеры и Safari) */
+        -ms-user-select: none; /* Для Internet Explorer */
+        user-select: none; /* Стандартное свойство */
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+      body {
+        margin: 0;
+        background-color: skyblue;
+        position: relative; /* Добавлено для корректного позиционирования абсолютных элементов */
+      }
+      canvas {
+        background: lightblue;
+        border: 1px solid black;
+        display: block;
+        margin: 0 auto; /* Центрируем canvas */
+      }
+      #menu,
+      #gameOverScreen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-image: url('menuBackground.svg');
+        background-size: cover;
+        z-index: 10; /* Отображаем меню поверх canvas */
+      }
 
-        #toggleSoundButton {
-            padding-top: 3%;
-        }
+      #toggleSoundButton {
+        padding-top: 3%;
+      }
 
-        button {
-            padding: 15px 30px;
-            margin: 10px;
-            font-size: 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #555;
-            color: white;
-            cursor: pointer;
-            user-select: none;
-            transition: background-color 0.3s;
-        }
+      button {
+        padding: 15px 30px;
+        margin: 10px;
+        font-size: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #555;
+        color: white;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 0.3s;
+      }
 
-        button:hover {
-            background-color: #777;
-        }
+      button:hover {
+        background-color: #777;
+      }
 
-        .controls {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-        }
+      .controls {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+      }
 
-        .control-button {
-            cursor: pointer;
-            user-select: none;
-            flex-basis: 28%; 
-        }
+      .control-button {
+        cursor: pointer;
+        user-select: none;
+        flex-basis: 28%;
+      }
 
-        #menuText {
-            position: fixed;
-            top: 0;
-            margin-top: 10%;
-            padding: 10px;
-            font-family: 'Joti One';
-            font-size: 15vw;
-            line-height: 91px;
-            background: linear-gradient(90deg, #1B8EE0 0%, #0D00FF 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        }
+      #menuText {
+        position: fixed;
+        top: 0;
+        margin-top: 10%;
+        padding: 10px;
+        font-family: 'Joti One';
+        font-size: 15vw;
+        line-height: 91px;
+        background: linear-gradient(90deg, #1b8ee0 0%, #0d00ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
 
-        .scoreContainer {
-            display: flex;
-            align-items: center;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-        }
+      .scoreContainer {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
 
-        .scoreText {
-            font-family: 'Joti One';
-            font-size: 25px;
-            line-height: 33px;
-            color: #000;
-        }
+      .scoreText {
+        font-family: 'Joti One';
+        font-size: 25px;
+        line-height: 33px;
+        color: #000;
+      }
 
-        #scoreDisplay {
-            font-family: 'Joti One';
-            font-size: 25px;
-            line-height: 33px;
-            color: #000;
-            margin-left: 10px; /* Отступ для числа */
-        }
+      #scoreDisplay {
+        font-family: 'Joti One';
+        font-size: 25px;
+        line-height: 33px;
+        color: #000;
+        margin-left: 10px; /* Отступ для числа */
+      }
 
-        /* Стили для toggleSoundGameBtn */
-        #toggleSoundGameBtnWrapper {
-            position: absolute;
-            top: 20px;
-            right: 20px; /* Правый верхний угол */
-            cursor: pointer;
-        }
+      /* Стили для toggleSoundGameBtn */
+      #toggleSoundGameBtnWrapper {
+        position: absolute;
+        top: 20px;
+        right: 20px; /* Правый верхний угол */
+        cursor: pointer;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div>
-        <!-- Обертка для текста "score:" и значения -->
-        <div class="scoreContainer">
-            <div class="scoreText">score:</div>
-            <div id="scoreDisplay">0</div>
-        </div>
+      <!-- Обертка для текста "score:" и значения -->
+      <div class="scoreContainer">
+        <div class="scoreText">score:</div>
+        <div id="scoreDisplay">0</div>
+      </div>
 
-        <canvas id="gameCanvas"></canvas>
+      <canvas id="gameCanvas"></canvas>
     </div>
 
-    <div id="menu" style="display: none;">
-        <a id="menuText">Fly Machine</a>
-        <img id="startButton" src="startButton.svg">
-        <img id="toggleSoundButton" src="soundButton.svg">
+    <div id="menu" style="display: none">
+      <a id="menuText">Fly Machine</a>
+      <img id="startButton" src="public/startButton.svg" />
+      <img id="toggleSoundButton" src="public/soundButton.svg" />
     </div>
 
     <div id="toggleSoundGameBtnWrapper">
-        <img id="toggleSoundGameBtn" src="soundOn.svg">
+      <img id="toggleSoundGameBtn" src="public/soundOn.svg" />
     </div>
 
     <div class="controls">
-        <img class="control-button" id="up" src="upButton.png">
-        <img class="control-button" id="down" src="downButton.png">
+      <img class="control-button" id="up" src="public/upButton.png" />
+      <img class="control-button" id="down" src="public/downButton.png" />
     </div>
 
     <script src="game.js"></script>
-</body>
+  </body>
 </html>
