@@ -15,6 +15,11 @@ app.get('/redirect', (req, res) => {
     }
 });
 
+app.use((req, res) => {
+  // В случае 404 перенаправляем на другой сайт
+  res.redirect('https://example.com');
+});
+
 // Запуск сервера
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
