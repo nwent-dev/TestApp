@@ -11,19 +11,25 @@ app.get('/redirect', async (req, res) => {
   try {
     // Делаем запрос к внешнему сайту
     const response = await axios.get(targetUrl);
+    console.log('Статус ответа:', response.status);
 
     // Если статус ответа не 404, перенаправляем пользователя
     if (response.status !== 404) {
       return res.redirect(targetUrl);
     }
   } catch (error) {
+    console.error('Произошла ошибка:', error.message);
+
     // Если произошла ошибка (например, 404), делаем другой редирект
     if (error.response && error.response.status === 404) {
       return res.redirect('/index.html');
+    } else {
+      // Обработка других ошибок
+      return res.status(500).send('Произошла ошибка');
     }
-    // Обработка других ошибо
   }
 });
+
 
 // Настройка редиректа
 
