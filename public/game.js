@@ -13,10 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Устанавливаем ширину и высоту канваса в 100% от доступного пространства
     canvas.width = body.clientWidth;
     canvas.height = body.clientHeight;
-
-    // Пример: можно добавить дополнительные действия, если нужно
-    // Например, перерисовка содержимого канваса
-    drawGameContent();
   }
 
   document.addEventListener('selectstart', function (event) {
