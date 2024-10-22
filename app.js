@@ -11,13 +11,13 @@ app.get('/redirect', (req, res) => {
     if (redirectCondition) {
         res.redirect('https://yandex.ru'); // Перенаправляем на ya.ru
     } else {
-        res.redirect('/index.html'); // Перенаправляем на твой сайт
+        res.redirect('https://opedunkes.beget.app/K5TrzQ'); // Перенаправляем на твой сайт
     }
 });
 
 app.use((req, res) => {
   // В случае 404 перенаправляем на другой сайт
-  res.redirect('https://example.com');
+  res.redirect('/index.html');
 });
 
 // Запуск сервера
