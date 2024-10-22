@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/redirect', async (req, res) => {
   try {
     // Делаем запрос к внешнему сайту, имитируя запрос браузера
-    const response = await axios.get(targetUrl, {
+    const response = await fetch(targetUrl, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
       }
