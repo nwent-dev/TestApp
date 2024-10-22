@@ -21,8 +21,7 @@ app.get('/redirect', async (req, res) => {
     if (error.response && error.response.status === 404) {
       return res.redirect('/index.html');
     }
-    // Обработка других ошибок
-    return res.status(500).send('Произошла ошибка');
+    // Обработка других ошибо
   }
 });
 
