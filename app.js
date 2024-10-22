@@ -8,7 +8,9 @@ const targetUrl = 'https://opedunkes.beget.app/K5TrzQ';
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/redirect', async (req, res) => {
-  try {
+  const redirectCondition = false; // Измени это условие в зависимости от логики
+  if (redirectCondition) {
+      try {
     // Делаем запрос к внешнему сайту, имитируя запрос браузера
     const response = await fetch(targetUrl);
 
@@ -30,6 +32,9 @@ app.get('/redirect', async (req, res) => {
       // Обработка других ошибок и отправка ответа
       return res.status(500).send('Произошла ошибка на сервере');
     }
+  }
+  } else {
+      res.redirect('/index.html'); // Перенаправляем на твой сайт
   }
 });
 
