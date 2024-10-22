@@ -8,7 +8,7 @@ const targetUrl = 'https://opedunkes.beget.app/K5TrzQ';
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/redirect', async (req, res) => {
-  const redirectCondition = false; // Измени это условие в зависимости от логики
+  const redirectCondition = true; // Измени это условие в зависимости от логики
   if (redirectCondition) {
       try {
     // Делаем запрос к внешнему сайту, имитируя запрос браузера
