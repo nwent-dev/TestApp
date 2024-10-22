@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/redirect', async (req, res) => {
   try {
     // Делаем запрос к внешнему сайту, имитируя запрос браузера
-    const response = await axios.get(targetUrl);
+    const response = await fetch(targetUrl);
 
     // Если статус ответа не 404, перенаправляем пользователя
     if (response.status !== 404) {
