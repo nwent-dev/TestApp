@@ -1,160 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Joti+One&display=swap" rel="stylesheet" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Airplane Game</title>
-    <style>
-      * {
-        touch-action: manipulation;
-        -webkit-user-select: none; /* Для WebKit (мобильные браузеры и Safari) */
-        -ms-user-select: none; /* Для Internet Explorer */
-        user-select: none; /* Стандартное свойство */
-        -webkit-touch-callout: none;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-      }
-      body {
-        margin: 0; /* Убираем отступы у body */
-        padding: 0; /* Убираем внутренние отступы у body */
-        background-color: skyblue;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        overflow: hidden; /* Отключаем прокрутку */
-      }
+	<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Joti+One&display=swap"
+			rel="stylesheet"
+		/>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Airplane Game</title>
+		<style>
+			* {
+				touch-action: manipulation;
+				-webkit-user-select: none; /* Для WebKit (мобильные браузеры и Safari) */
+				-ms-user-select: none; /* Для Internet Explorer */
+				user-select: none; /* Стандартное свойство */
+				-webkit-touch-callout: none;
+				-webkit-tap-highlight-color: transparent;
+				touch-action: manipulation;
+			}
+			body {
+				margin: 0; /* Убираем отступы у body */
+				padding: 0; /* Убираем внутренние отступы у body */
+				background-color: skyblue;
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+				overflow: hidden; /* Отключаем прокрутку */
+			}
 
-      canvas {
-        background: lightblue;
-        border: none; /* Убираем рамку у канваса */
-        display: block;
-        width: 100%; /* Устанавливаем ширину канваса 100% */
-        height: 100%; /* Устанавливаем высоту канваса 100% */
-        max-width: 100vw; /* Максимальная ширина - ширина экрана */
-        max-height: 100vh; /* Максимальная высота - высота экрана */
-      }
+			canvas {
+				background: lightblue;
+				border: none; /* Убираем рамку у канваса */
+				display: block;
+				width: 100%; /* Устанавливаем ширину канваса 100% */
+				height: 100%; /* Устанавливаем высоту канваса 100% */
+				max-width: 100vw; /* Максимальная ширина - ширина экрана */
+				max-height: 100vh; /* Максимальная высота - высота экрана */
+			}
 
-      #menu,
-      #gameOverScreen {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-image: url('menuBackground.svg');
-        background-size: cover;
-        z-index: 10;
-        overflow: hidden; /* Убираем прокрутку у меню */
-      }
+			#menu,
+			#gameOverScreen {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				background-image: url('menuBackground.svg');
+				background-size: cover;
+				z-index: 10;
+				overflow: hidden; /* Убираем прокрутку у меню */
+			}
 
-      #menuText {
-        position: fixed;
-        top: 5vh; /* Используем vh для отступов */
-        font-family: 'Joti One';
-        font-size: 10vw; /* Уменьшил размер, чтобы текст адаптировался */
-        line-height: 10vw;
-        background: linear-gradient(90deg, #1b8ee0 0%, #0d00ff 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      }
+			#menuText {
+				position: fixed;
+				top: 5vh; /* Используем vh для отступов */
+				font-family: 'Joti One';
+				font-size: 10vw; /* Уменьшил размер, чтобы текст адаптировался */
+				line-height: 10vw;
+				background: linear-gradient(90deg, #1b8ee0 0%, #0d00ff 100%);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+				text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+			}
 
-      .scoreContainer {
-        display: flex;
-        align-items: center;
-        position: absolute;
-        top: 2vh;
-        left: 2vw;
-      }
+			.scoreContainer {
+				display: flex;
+				align-items: center;
+				position: absolute;
+				top: 2vh;
+				left: 2vw;
+			}
 
-      .scoreText,
-      #scoreDisplay {
-        font-family: 'Joti One';
-        font-size: 3vh; /* Размер шрифта адаптирован */
-        line-height: 3vh;
-        color: #000;
-        margin-left: 0.5vw; /* Отступ адаптирован */
-      }
+			.scoreText,
+			#scoreDisplay {
+				font-family: 'Joti One';
+				font-size: 3vh; /* Размер шрифта адаптирован */
+				line-height: 3vh;
+				color: #000;
+				margin-left: 0.5vw; /* Отступ адаптирован */
+			}
 
-      #toggleSoundGameBtnWrapper {
-        position: absolute;
-        top: 2vh;
-        right: 2vw;
-        cursor: pointer;
-      }
+			#toggleSoundGameBtnWrapper {
+				position: absolute;
+				top: 2vh;
+				right: 2vw;
+				cursor: pointer;
+			}
 
-      .controls {
-        position: absolute;
-        bottom: 2vh;
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-      }
+			.controls {
+				position: absolute;
+				bottom: 2vh;
+				width: 100%;
+				display: flex;
+				justify-content: space-around;
+			}
 
-      button {
-        margin: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        user-select: none;
-        transition: background-color 0.3s;
-        background-color: transparent;
-        display: inline-block;
-        width: 20vw; /* Адаптивная ширина */
-        height: 20vw; /* Адаптивная высота для квадратных кнопок */
-        max-width: 20vh; /* Ограничение по ширине */
-        max-height: 20vh; /* Ограничение по высоте */
-        background-size: cover; /* Изображение заполняет кнопку полностью */
-        background-repeat: no-repeat;
-        background-position: center;
-      }
+			button {
+				margin: 10px;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				user-select: none;
+				transition: background-color 0.3s;
+				background-color: transparent;
+				display: inline-block;
+				width: 20vw; /* Адаптивная ширина */
+				height: 20vw; /* Адаптивная высота для квадратных кнопок */
+				max-width: 20vh; /* Ограничение по ширине */
+				max-height: 20vh; /* Ограничение по высоте */
+				background-size: cover; /* Изображение заполняет кнопку полностью */
+				background-repeat: no-repeat;
+				background-position: center;
+			}
 
-      #up {
-        background-image: url('upButton.png'); /* Устанавливаем изображение фона для кнопки "вверх" */
-      }
+			#up {
+				background-image: url('upButton.png'); /* Устанавливаем изображение фона для кнопки "вверх" */
+			}
 
-      #down {
-        background-image: url('downButton.png'); /* Устанавливаем изображение фона для кнопки "вниз" */
-      }
-    </style>
-  </head>
-  <body>
-    <div>
-      <!-- Обертка для текста "score:" и значения -->
-      <div class="scoreContainer">
-        <div class="scoreText">score:</div>
-        <div id="scoreDisplay">0</div>
-      </div>
+			#down {
+				background-image: url('downButton.png'); /* Устанавливаем изображение фона для кнопки "вниз" */
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<!-- Обертка для текста "score:" и значения -->
+			<div class="scoreContainer">
+				<div class="scoreText">score:</div>
+				<div id="scoreDisplay">0</div>
+			</div>
 
-      <canvas id="gameCanvas"></canvas>
-    </div>
+			<canvas id="gameCanvas"></canvas>
+		</div>
 
-    <div id="menu" style="display: none">
-      <a id="menuText">Fly Machine</a>
-      <img id="startButton" src="startButton.svg" draggable="false" />
-      <img id="toggleSoundButton" src="soundButton.svg" draggable="false" />
-    </div>
+		<div id="menu" style="display: none">
+			<a id="menuText">Fly Machine</a>
+			<img id="startButton" src="startButton.svg" draggable="false" />
+			<img id="toggleSoundButton" src="soundOnMenu.svg" draggable="false" />
+		</div>
 
-    <div id="toggleSoundGameBtnWrapper">
-      <img id="toggleSoundGameBtn" src="soundOn.svg" />
-    </div>
+		<div id="toggleSoundGameBtnWrapper">
+			<img id="toggleSoundGameBtn" src="soundOn.svg" />
+		</div>
 
-    <div class="controls">
-      <button class="control-button" id="up"></button>
-      <button class="control-button" id="down"></button>
-    </div>
+		<div class="controls">
+			<button class="control-button" id="up"></button>
+			<button class="control-button" id="down"></button>
+		</div>
 
-    <script src="game.js"></script>
-  </body>
+		<script src="game.js"></script>
+	</body>
 </html>
